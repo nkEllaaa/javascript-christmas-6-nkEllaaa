@@ -25,5 +25,28 @@ class Controller {
       Console.print(error.message);
     }
   }
+
+  formatDateTwoDigits(visitDate) {
+    if (visitDate < 10) {
+      return `0${visitDate}`;
+    }
+    return visitDate;
+  }
+
+  returnEvents() {
+    return {
+      christmas: false,
+      weekday: false,
+      weekend: false,
+      special: false,
+      champagne: false,
+    };
+  }
+
+  formatDateToDay(twoDigitDate) {
+    const formattedDate = `2023-12-${twoDigitDate}`;
+    const visitDay = new Date(formattedDate).getDay();
+    return visitDay;
+  }
 }
 export default Controller;
