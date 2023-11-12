@@ -48,5 +48,19 @@ class Controller {
     const visitDay = new Date(formattedDate).getDay();
     return visitDay;
   }
+
+  judgeWeekdayOrWeekendEvent(visitDay) {
+    const events = this.returnEvents();
+
+    if (visitDay === 5 || visitDay === 6) {
+      events.christmas = true;
+      events.weekend = true;
+    } else {
+      events.christmas = true;
+      events.weekday = true;
+    }
+
+    return events;
+  }
 }
 export default Controller;
