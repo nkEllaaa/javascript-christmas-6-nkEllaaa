@@ -5,6 +5,8 @@ class EventCalculator {
   #totalPrice;
   #totalDiscountPrice;
   #eventList;
+  #dissertCount;
+  #mainCount;
   #visitDate;
   #orderMenu;
 
@@ -12,6 +14,8 @@ class EventCalculator {
     this.#totalPrice;
     this.#totalDiscountPrice;
     this.#eventList;
+    this.#dissertCount;
+    this.#mainCount;
     this.#visitDate;
     this.#orderMenu;
   }
@@ -38,25 +42,33 @@ class EventCalculator {
     this.#totalDiscountPrice += christMasDiscountAmount;
   }
 
-  // 주중 이벤트를 위한 디저트 개수
+  // 디저트, 메인 메뉴 개수 파악
   getDessertCount() {
     let dessertCount = 0;
+    let mainCount = 0;
     this.#orderMenu.forEach((orderItem) => {
       const SameMenu = MenuList[orderItem.name];
-      if (SameMenu) {
-        dessertCount++;
+      if (SameMenu.type === 'dessert') {
+        dessertCount += orderItem.count;
+      } else if (SameMenu.type === 'main') {
+        mainCount += orderItem.count;
       }
     });
 
-    console.log('토탈', dessertCount);
-    return dessertCount;
+    this.#dissertCount = dessertCount;
+    this.#mainCount = mainCount;
   }
 
   // 주중 이벤트 계산
   calculateWeekdayEvent() {
-    const dessertCount = this.getDessertCount();
-    const totalWeekdayDiscountAmount = dessertCount * 2023;
-    return totalWeekdayDiscountAmount;
+    const weekdayDiscountAmount = this.#dessertCount * 2023;
+    return weekdayDiscountAmount;
+  }
+
+  // 주말 이벤트 계산
+  calculateWeekendEvent() {
+    const weekendDiscountAmount = this.#mainCount * 2023;
+    return weekendDiscountAmount;
   }
 }
 
