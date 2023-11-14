@@ -36,6 +36,20 @@ class EventCalculator {
     this.#orderMenu = orderMenu;
   }
 
+  getTotalDiscountAmount() {
+    return this.#totalDiscountPrice;
+  }
+
+  calculateAllEvents() {
+    this.calculateChristmasEvent();
+    this.getDessertCount();
+    this.calculateWeekdayEvent();
+    this.calculateWeekendEvent();
+    this.calculateSpecialEvent();
+    this.calculateChampagneEvent();
+    this.calculateBadgeEvent();
+  }
+  
   // 크리스마스 이벤트 계산
   calculateChristmasEvent() {
     const christMasDiscountAmount = this.#visitDate - 1 * 100 + 1000;
