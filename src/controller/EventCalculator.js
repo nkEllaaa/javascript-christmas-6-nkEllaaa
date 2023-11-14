@@ -31,6 +31,12 @@ class EventCalculator {
   setOrderMenu(orderMenu) {
     this.#orderMenu = orderMenu;
   }
+
+  // 크리스마스 이벤트 계산
+  calculateChristmasEvent(visitDate) {
+    const christMasDiscountAmount = visitDate - 1 * 100 + 1000;
+    this.#totalDiscountPrice += christMasDiscountAmount;
+  }
 }
 
 export default EventCalculator;
