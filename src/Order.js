@@ -1,3 +1,5 @@
+import MenuList from './MenuList';
+
 class Order {
   #orderMenu;
   #visitDate;
@@ -20,5 +22,17 @@ class Order {
     return this.#orderMenu;
   }
 
+  setTotalPrice() {
+    let totalPrice = 0;
+
+    this.#orderMenu.forEach((orderItem) => {
+      const menuInfo = MenuList[orderItem.name];
+      if (menuInfo) {
+        totalPrice += menuInfo.price * orderItem.count;
+      }
+    });
+    console.log('토탈', totalPrice);
+    return totalPrice;
+  }
 }
 export default Order;
