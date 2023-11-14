@@ -1,4 +1,3 @@
-import Order from '../Order';
 import MenuList from '../MenuList';
 
 class EventCalculator {
@@ -48,7 +47,7 @@ class EventCalculator {
 
   calculateAllEvents() {
     this.calculateChristmasEvent();
-    this.getDessertCount();
+    this.calculateDessertAndMainCount();
     this.calculateWeekdayEvent();
     this.calculateWeekendEvent();
     this.calculateSpecialEvent();
@@ -67,7 +66,7 @@ class EventCalculator {
   }
 
   // 디저트, 메인 메뉴 개수 파악
-  getDessertCount() {
+  calculateDessertAndMainCount() {
     let dessertCount = 0;
     let mainCount = 0;
     this.#orderMenu.forEach((orderItem) => {
@@ -78,6 +77,7 @@ class EventCalculator {
         mainCount += orderItem.count;
       }
     });
+
     this.#dessertCount = dessertCount;
     this.#mainCount = mainCount;
   }
@@ -86,7 +86,6 @@ class EventCalculator {
   calculateWeekdayEvent() {
     if (this.#eventList.weekday) {
       const weekdayDiscountAmount = this.#dessertCount * 2023;
-      console.log('주중할인', weekdayDiscountAmount);
       this.#totalDiscountPrice += weekdayDiscountAmount;
       this.#expectedTotalPrice += weekdayDiscountAmount;
     }
