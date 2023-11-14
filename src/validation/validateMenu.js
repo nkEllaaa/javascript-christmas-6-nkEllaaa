@@ -1,21 +1,22 @@
-import MENU from '../constants/menu';
+import MenuList from '../MenuList.js';
 
 const validateMenu = (menuAndQuantity) => {
-  if (menuAndQuantity.length < 1) throw new Error('[ERROR]');
+  if (menuAndQuantity.length < 1) throw new Error('[ERROR]1');
 
-  const orderPattern = /^([가-힣]+)-(\d+)(?:, ([가-힣]+)-(\d+))*$/;
-  if (!orderPattern.test(menuAndQuantity)) throw new Error('[ERROR]');
+  const orderPattern = /^([가-힣]+)-(\d+)$/;
+  const isValidPattern = menuAndQuantity.every((menu) => orderPattern.test(menu));
 
   const menuNames = menuAndQuantity.map((menuName) => {
-    menuName.split('-')[0];
+    return menuName.split('-')[0];
   });
 
-  const invalidMenu = menuNames.find((name) => !MENU.hasOwnProperty(name));
-  if (invalidMenu) throw new Error(`[ERROR]`);
-  
-  if (!menuNames.every((menuName) => MENU[menuName] && MENU[menuName].type === 'beverage')) throw new Error('[ERROR]');
+  const invalidMenu = menuNames.find((name) => !MenuList.hasOwnProperty(name));
+  if (invalidMenu) throw new Error(`[ERROR]3`);
 
-  if (menuNames.length !== new Set(menuNames).size) throw new Error('[ERROR]');
+  if (menuNames.every((menuName) => MenuList[menuName].type === 'beverage'))
+    throw new Error('[ERROR]4');
+
+  if (menuNames.length !== new Set(menuNames).size) throw new Error('[ERROR]5');
 };
 
 export default validateMenu;
