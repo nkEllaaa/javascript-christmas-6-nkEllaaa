@@ -9,6 +9,7 @@ class EventCalculator {
   #mainCount;
   #visitDate;
   #orderMenu;
+  #discountAmount;
 
   constructor() {
     this.#totalPrice;
@@ -19,6 +20,13 @@ class EventCalculator {
     this.#mainCount;
     this.#visitDate;
     this.#orderMenu;
+    this.#discountAmount = {
+      크리스마스_디데이_할인: 0,
+      평일_할인: 0,
+      주말_할인: 0,
+      특별_할인: 0,
+      증정_이벤트: 0,
+    }
   }
 
   setEventList(eventList) {
@@ -45,6 +53,14 @@ class EventCalculator {
     return this.#totalPrice - this.#expectedTotalPrice;
   }
 
+  getDiscountAmount() {
+    return this.#discountAmount;
+  }
+
+  getEventListIncludeBadge() {
+    return this.#eventList
+  }
+
   calculateAllEvents() {
     this.calculateChristmasEvent();
     this.calculateDessertAndMainCount();
@@ -60,6 +76,7 @@ class EventCalculator {
     if (this.#eventList.christmas) {
       const christMasDiscountAmount = (this.#visitDate - 1) * 100 + 1000;
       console.log('크리스마스이벤트', christMasDiscountAmount)
+      this.#discountAmount.크리스마스_디데이_할인 = christMasDiscountAmount;
       this.#totalDiscountPrice += christMasDiscountAmount;
       this.#expectedTotalPrice += christMasDiscountAmount;
     }
@@ -86,6 +103,7 @@ class EventCalculator {
   calculateWeekdayEvent() {
     if (this.#eventList.weekday) {
       const weekdayDiscountAmount = this.#dessertCount * 2023;
+      this.#discountAmount.평일_할인 = weekdayDiscountAmount;
       this.#totalDiscountPrice += weekdayDiscountAmount;
       this.#expectedTotalPrice += weekdayDiscountAmount;
     }
@@ -95,6 +113,7 @@ class EventCalculator {
   calculateWeekendEvent() {
     if (this.#eventList.weekend) {
       const weekendDiscountAmount = this.#mainCount * 2023;
+      this.#discountAmount.주말_할인 = weekendDiscountAmount;
       this.#totalDiscountPrice += weekendDiscountAmount;
       this.#expectedTotalPrice += weekendDiscountAmount;
     }
@@ -104,6 +123,7 @@ class EventCalculator {
   calculateSpecialEvent() {
     if (this.#eventList.special) {
       const specialDiscountAmount = 1000;
+      this.#discountAmount.특별_할인 = specialDiscountAmount;
       this.#totalDiscountPrice += specialDiscountAmount;
       this.#expectedTotalPrice += specialDiscountAmount;
     }
@@ -113,6 +133,7 @@ class EventCalculator {
   calculateChampagneEvent() {
     if (this.#totalPrice >= 120000) {
       const champagneDiscountAmount = 25000;
+      this.#discountAmount = champagneDiscountAmount;
       this.#totalDiscountPrice += champagneDiscountAmount;
     }
   }
