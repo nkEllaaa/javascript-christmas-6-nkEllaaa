@@ -12,7 +12,6 @@ class EventManager {
       weekend: false,
       special: false,
       champagne: false,
-      badge: '',
     };
   }
 
@@ -73,10 +72,5 @@ class EventManager {
   checkChampagne(totalPrice) {
     if (totalPrice >= 120000) this.#eventList.champagne = true;
   }
-
-  //배지 이벤트 판단
-  // checkBadgeEvent() {
-  // 계산기에서 총 할인 금액 가져와서 금액에 따라 배지 초기화
-  // }
 }
 export default EventManager;
