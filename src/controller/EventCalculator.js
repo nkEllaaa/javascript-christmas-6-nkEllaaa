@@ -6,12 +6,14 @@ class EventCalculator {
   #totalDiscountPrice;
   #eventList;
   #visitDate;
+  #orderMenu;
 
   constructor() {
     this.#totalPrice;
     this.#totalDiscountPrice;
     this.#eventList;
     this.#visitDate;
+    this.#orderMenu;
   }
 
   setEventList(eventList) {
@@ -24,6 +26,10 @@ class EventCalculator {
 
   setVisitDate(visitDate) {
     this.#visitDate = visitDate;
+  }
+
+  setOrderMenu(orderMenu) {
+    this.#orderMenu = orderMenu;
   }
 }
 
