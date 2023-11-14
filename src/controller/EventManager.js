@@ -7,11 +7,12 @@ class EventManager {
     this.#visitDateNumber;
     this.#visitDayNumber;
     this.#eventList = {
-      christmas: false,
-      weekday: false,
-      weekend: false,
-      special: false,
-      champagne: false,
+      크리스마스_디데이_할인: false,
+      평일_할인: false,
+      주말_할인: false,
+      특별_할인: false,
+      증정_이벤트: false,
+      이벤트_배지:'',
     };
   }
 
@@ -49,28 +50,28 @@ class EventManager {
 
   //크리스마스 이벤트 판단
   checkChristmasEvent() {
-    if (this.#visitDateNumber >= 1 && this.#visitDateNumber <= 25) this.#eventList.christmas = true;
+    if (this.#visitDateNumber >= 1 && this.#visitDateNumber <= 25) this.#eventList.크리스마스_디데이_할인 = true;
   }
 
   //주말,주중 이벤트 판단
   checkweekdayOrEndEvent() {
     if (this.#visitDayNumber === 5 || this.#visitDayNumber === 6) {
-      this.#eventList.weekend = true;
-      this.#eventList.weekday = false;
+      this.#eventList.주말_할인 = true;
+      this.#eventList.평일_할인 = false;
     } else {
-      this.#eventList.weekday = true;
-      this.#eventList.weekend = false;
+      this.#eventList.평일_할인 = true;
+      this.#eventList.주말_할인 = false;
     }
   }
 
   //스페셜 이벤트 판단
   checkSpecialEvent() {
-    if (this.#visitDayNumber === 0 || this.#visitDateNumber === 25) this.#eventList.special = true;
+    if (this.#visitDayNumber === 0 || this.#visitDateNumber === 25) this.#eventList.특별_할인 = true;
   }
 
   //샴페인 증정 이벤트 판단
   checkChampagne(totalPrice) {
-    if (totalPrice >= 120000) this.#eventList.champagne = true;
+    if (totalPrice >= 120000) this.#eventList.증정_이벤트 = true;
   }
 }
 export default EventManager;
