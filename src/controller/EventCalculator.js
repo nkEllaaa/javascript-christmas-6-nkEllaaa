@@ -4,17 +4,19 @@ import MenuList from '../MenuList';
 class EventCalculator {
   #totalPrice;
   #totalDiscountPrice;
+  #expectedTotalPrice;
   #eventList;
-  #dissertCount;
+  #dessertCount;
   #mainCount;
   #visitDate;
   #orderMenu;
 
   constructor() {
     this.#totalPrice;
-    this.#totalDiscountPrice;
+    this.#totalDiscountPrice = 0;
+    this.#expectedTotalPrice = 0;
     this.#eventList;
-    this.#dissertCount;
+    this.#dessertCount;
     this.#mainCount;
     this.#visitDate;
     this.#orderMenu;
@@ -40,6 +42,10 @@ class EventCalculator {
     return this.#totalDiscountPrice;
   }
 
+  getExpectedTotalPrice() {
+    return this.#totalPrice - this.#expectedTotalPrice;
+  }
+
   calculateAllEvents() {
     this.calculateChristmasEvent();
     this.getDessertCount();
@@ -49,11 +55,15 @@ class EventCalculator {
     this.calculateChampagneEvent();
     this.calculateBadgeEvent();
   }
-  
+
   // 크리스마스 이벤트 계산
   calculateChristmasEvent() {
-    const christMasDiscountAmount = this.#visitDate - 1 * 100 + 1000;
-    this.#totalDiscountPrice += christMasDiscountAmount;
+    if (this.#eventList.christmas) {
+      const christMasDiscountAmount = (this.#visitDate - 1) * 100 + 1000;
+      console.log('크리스마스이벤트', christMasDiscountAmount)
+      this.#totalDiscountPrice += christMasDiscountAmount;
+      this.#expectedTotalPrice += christMasDiscountAmount;
+    }
   }
 
   // 디저트, 메인 메뉴 개수 파악
@@ -68,28 +78,35 @@ class EventCalculator {
         mainCount += orderItem.count;
       }
     });
-
-    this.#dissertCount = dessertCount;
+    this.#dessertCount = dessertCount;
     this.#mainCount = mainCount;
   }
 
   // 주중 이벤트 계산
   calculateWeekdayEvent() {
-    const weekdayDiscountAmount = this.#dessertCount * 2023;
-    this.#totalDiscountPrice += weekdayDiscountAmount;
+    if (this.#eventList.weekday) {
+      const weekdayDiscountAmount = this.#dessertCount * 2023;
+      console.log('주중할인', weekdayDiscountAmount);
+      this.#totalDiscountPrice += weekdayDiscountAmount;
+      this.#expectedTotalPrice += weekdayDiscountAmount;
+    }
   }
 
   // 주말 이벤트 계산
   calculateWeekendEvent() {
-    const weekendDiscountAmount = this.#mainCount * 2023;
-    this.#totalDiscountPrice += weekendDiscountAmount;
+    if (this.#eventList.weekend) {
+      const weekendDiscountAmount = this.#mainCount * 2023;
+      this.#totalDiscountPrice += weekendDiscountAmount;
+      this.#expectedTotalPrice += weekendDiscountAmount;
+    }
   }
 
   // 스페셜 이벤트 계산
   calculateSpecialEvent() {
-    if (this.#eventList.special === true) {
+    if (this.#eventList.special) {
       const specialDiscountAmount = 1000;
       this.#totalDiscountPrice += specialDiscountAmount;
+      this.#expectedTotalPrice += specialDiscountAmount;
     }
   }
 
