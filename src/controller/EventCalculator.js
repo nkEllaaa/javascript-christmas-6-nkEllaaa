@@ -119,9 +119,9 @@ class EventCalculator {
 
   // 배지 이벤트 계산
   calculateBadgeEvent() {
-    if (this.#totalDiscountPrice >= 20000) this.#eventList.badge = '산타';
-    else if (this.#totalDiscountPrice >= 10000) this.#eventList.badge = '트리';
-    else if (this.#totalDiscountPrice >= 5000) this.#eventList.badge = '별';
+    if (this.#totalDiscountPrice >= 20000) this.#eventList.이벤트_배지 = '산타';
+    else if (this.#totalDiscountPrice >= 10000) this.#eventList.이벤트_배지 = '트리';
+    else if (this.#totalDiscountPrice >= 5000) this.#eventList.이벤트_배지 = '별';
   }
 }
 
