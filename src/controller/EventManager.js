@@ -23,7 +23,6 @@ class EventManager {
   formatDateAndjudgeValidEvents(totalPrice) {
     this.formatDateTwoDigits();
     this.formatDateToDay();
-    
     this.checkChristmasEvent();
     this.checkweekdayOrEndEvent();
     this.checkSpecialEvent();
@@ -44,7 +43,6 @@ class EventManager {
   formatDateToDay() {
     const formattedDate = `2023-12-${this.#visitDateNumber}`;
     const visitDayNumber = new Date(formattedDate).getDay();
-    console.log('포메티드대이트', formattedDate);
     this.#visitDayNumber = visitDayNumber;
   }
 

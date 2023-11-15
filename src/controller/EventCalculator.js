@@ -75,7 +75,6 @@ class EventCalculator {
   calculateChristmasEvent() {
     if (this.#eventList.크리스마스_디데이_할인) {
       const christMasDiscountAmount = (this.#visitDate - 1) * 100 + 1000;
-      console.log('크리스마스이벤트', christMasDiscountAmount)
       this.#discountAmount.크리스마스_디데이_할인 = christMasDiscountAmount;
       this.#totalDiscountPrice += christMasDiscountAmount;
       this.#expectedTotalPrice += christMasDiscountAmount;
@@ -86,6 +85,7 @@ class EventCalculator {
   calculateDessertAndMainCount() {
     let dessertCount = 0;
     let mainCount = 0;
+    
     this.#orderMenu.forEach((orderItem) => {
       const SameMenu = MenuList[orderItem.name];
       if (SameMenu.type === 'dessert') {
