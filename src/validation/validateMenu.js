@@ -6,8 +6,8 @@ const validateMenu = (menuAndQuantity) => {
   const orderPattern = /^([가-힣]+)-(\d+)$/;
   const isValidPattern = menuAndQuantity.every((menu) => orderPattern.test(menu));
 
-  const menuNames = menuAndQuantity.map((menuName) => {
-    return menuName.split('-')[0];
+  const menuNames = menuAndQuantity.flatMap((menuAndQuantity) => {
+    return menuAndQuantity.split(',').map((menuName) => menuName.split('-')[0]);
   });
 
   const invalidMenu = menuNames.find((name) => !MenuList.hasOwnProperty(name));
