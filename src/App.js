@@ -110,7 +110,7 @@ class App {
       this.#eventPlanner.printDiscount(this.#discountAmount);
       return;
     }
-    this.#eventPlanner.printprice(0);
+    this.#eventPlanner.printPrice(0);
   }
 
   runExpectedPriceAfterDiscount() {
