@@ -34,7 +34,7 @@ class App {
     this.#eventCalculator = new EventCalculator();
     this.#eventManager = new EventManager();
   }
-  
+
   async run() {
     await this.createOrder();
     this.formatOrder();
@@ -110,7 +110,7 @@ class App {
       this.#eventPlanner.printDiscount(this.#discountAmount);
       return;
     }
-    this.#eventPlanner.printNothing();
+    this.#eventPlanner.printprice(0);
   }
 
   runExpectedPriceAfterDiscount() {
