@@ -12,9 +12,11 @@ class App {
   #eventList;
   #discountAmount;
   #expectedPriceAfterDiscount;
-  #eventPlanner;
   #eventListBadge;
   #discountPriceList;
+  #eventPlanner;
+  #eventCalculator;
+  #eventManager;
 
   constructor() {
     this.#totalPriceBeforeDiscount;
@@ -28,11 +30,10 @@ class App {
     this.#eventListBadge;
     this.#discountPriceList;
     this.#eventPlanner = new EventPlanner();
+    this.#eventCalculator = new EventCalculator();
+    this.#eventManager = new EventManager();
   }
   async run() {
-    const eventCalculator = new EventCalculator();
-    const eventManager = new EventManager();
-
     // 안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.
     this.#eventPlanner.printWelcome();
 
@@ -56,44 +57,31 @@ class App {
     this.#totalPriceBeforeDiscount = this.#order.setTotalPrice();
 
     // 이벤트 매니저로 유효한 이벤트 판단
-    eventManager.getVisitDateNumber(this.#visitDate);
-    eventManager.formatDateAndjudgeValidEvents(this.#totalPriceBeforeDiscount);
+    this.#eventManager.getVisitDateNumber(this.#visitDate);
+    this.#eventManager.formatDateAndjudgeValidEvents(this.#totalPriceBeforeDiscount);
 
     // 유효한 이벤트 리스트 겟
-    this.#eventList = eventManager.getEventList();
+    this.#eventList = this.#eventManager.getEventList();
     // console.log('이벤트 리스트', eventList);
 
     // 유효한 이벤트, 총주문금액, 방문날짜, 주문을 계산기에 넘겨줌
-    eventCalculator.setEventList(this.#eventList);
-    eventCalculator.setTotalPrice(this.#totalPriceBeforeDiscount);
-    eventCalculator.setVisitDate(this.#visitDate);
-    eventCalculator.setOrderMenu(this.#formattedOrderMenu);
+    this.#eventCalculator.setEventList(this.#eventList);
+    this.#eventCalculator.setTotalPrice(this.#totalPriceBeforeDiscount);
+    this.#eventCalculator.setVisitDate(this.#visitDate);
+    this.#eventCalculator.setOrderMenu(this.#formattedOrderMenu);
 
     // 이벤트 계산기를 실행시켜서 할인받는 금액을 계산
-    eventCalculator.calculateAllEvents();
+    this.#eventCalculator.calculateAllEvents();
 
     // 총혜택금액
-    this.#discountAmount = eventCalculator.getTotalDiscountAmount();
+    this.#discountAmount = this.#eventCalculator.getTotalDiscountAmount();
 
     // 샴페인 가격을 뺀 나머지 혜택 금액 = 할인 후 예상 결제 금액
-    this.#expectedPriceAfterDiscount = eventCalculator.getExpectedTotalPrice();
-    this.#discountPriceList = eventCalculator.getDiscountAmount();
-    this.#eventListBadge = eventCalculator.getEventListIncludeBadge();
+    this.#expectedPriceAfterDiscount = this.#eventCalculator.getExpectedTotalPrice();
+    this.#discountPriceList = this.#eventCalculator.getDiscountAmount();
+    this.#eventListBadge = this.#eventCalculator.getEventListIncludeBadge();
 
-    // <주문 메뉴>
-    this.runOrderMenu();
-    // <할인 전 총주문 금액>
-    this.runTotalPriceBeforeDiscount();
-    // <증정 메뉴>
-    this.runIsChampagne();
-    // <혜택 내역>
-    this.runBenefitList();
-    //< 총혜택금액>
-    this.runTotalBenefitPrice();
-    // <할인 후 예상 결제 금액>
-    this.runExpectedPriceAfterDiscount;
-    //<배지>
-    this.runEventBadge();
+    this.runEventPlanner();
   }
 
   runOrderMenu() {
@@ -146,6 +134,24 @@ class App {
     }
     this.#eventPlanner.printNothing();
   }
+
+  runEventPlanner() {
+    // <주문 메뉴>
+    this.runOrderMenu();
+    // <할인 전 총주문 금액>
+    this.runTotalPriceBeforeDiscount();
+    // <증정 메뉴>
+    this.runIsChampagne();
+    // <혜택 내역>
+    this.runBenefitList();
+    //< 총혜택금액>
+    this.runTotalBenefitPrice();
+    // <할인 후 예상 결제 금액>
+    this.runExpectedPriceAfterDiscount;
+    //<배지>
+    this.runEventBadge();
+  }
+
 }
 
 export default App;
