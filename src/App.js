@@ -35,20 +35,34 @@ class App {
     this.#eventManager = new EventManager();
   }
   async run() {
+    await this.createOrder();
+    this.formatOrder();
+    this.createEventList();
+    this.calculateEvent();
+    this.runEventPlanner();
+  }
+
+  async createOrder() {
     this.#eventPlanner.printWelcome();
     this.#visitDate = await this.#eventPlanner.getVisitDate();
     this.#orderMenu = await this.#eventPlanner.getOrderMenu();
     this.#eventPlanner.printDiscountForDate(this.#visitDate);
-
     this.#order = new Order(this.#visitDate, this.#orderMenu);
+  }
+
+  formatOrder() {
     this.#order.formatOrderMenuObject();
     this.#formattedOrderMenu = this.#order.getFormattedOrder();
     this.#totalPriceBeforeDiscount = this.#order.setTotalPrice();
+  }
 
+  createEventList() {
     this.#eventManager.getVisitDateNumber(this.#visitDate);
     this.#eventManager.formatDateAndjudgeValidEvents(this.#totalPriceBeforeDiscount);
     this.#eventList = this.#eventManager.getEventList();
+  }
 
+  calculateEvent() {
     this.#eventCalculator.setEventList(this.#eventList);
     this.#eventCalculator.setTotalPrice(this.#totalPriceBeforeDiscount);
     this.#eventCalculator.setVisitDate(this.#visitDate);
@@ -59,8 +73,6 @@ class App {
     this.#expectedPriceAfterDiscount = this.#eventCalculator.getExpectedTotalPrice();
     this.#discountPriceList = this.#eventCalculator.getDiscountAmount();
     this.#eventListBadge = this.#eventCalculator.getEventListIncludeBadge();
-
-    this.runEventPlanner();
   }
 
   runOrderMenu() {
