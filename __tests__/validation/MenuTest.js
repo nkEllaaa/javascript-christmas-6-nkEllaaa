@@ -23,7 +23,7 @@ describe('주문 메뉴 테스트 ', () => {
 
   test('주문 메뉴 중복 테스트', () => {
     const menu = ['시저샐러드-1,시저샐러드-1,제로콜라-1'];
-    expect(() => validateMenu(menu)).toThrow('[ERROR]');
+    expect(() => validateMenu(menu)).toThrow('[ERROR]5');
   });
 
   test('옳은 주문에서 통과하는지 테스트', () => {

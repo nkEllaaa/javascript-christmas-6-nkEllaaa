@@ -27,7 +27,7 @@ class App {
     // 오더에서 주문 메뉴의 형식을 바꿔줌
     order.formatOrderMenuObject();
     const formattedOrder = order.getFormattedOrder();
-    console.log('포멧',formattedOrder)
+    console.log('포멧', formattedOrder);
 
     // <주문 메뉴>
     eventPlanner.printTitleOrderMenu();
@@ -71,7 +71,10 @@ class App {
     console.log('할인 후 예상 결제 금액', expectedTotalPrice);
 
     const discountAmount = eventCalculator.getDiscountAmount();
-const eventListBadge = eventCalculator.getEventListIncludeBadge();
+    console.log('디스카운트어마운ㅊ트', discountAmount);
+
+    const eventListBadge = eventCalculator.getEventListIncludeBadge();
+    console.log('배지포함', eventListBadge);
     if (totalPrice < 10000) {
       // <증정 메뉴>
       eventPlanner.printTitleChampagne();
@@ -101,17 +104,17 @@ const eventListBadge = eventCalculator.getEventListIncludeBadge();
       // 평일 할인: -4,046원
       // 특별 할인: -1,000원
       // 증정 이벤트: -25,000원
-      eventPlanner.printTotalDiscountList(discountAmount);
+      eventPlanner.printTotalDiscountList(discountAmount, eventList);
       //<총 혜택 금액>
       eventPlanner.printTitleExpectedPrice();
       eventPlanner.printDiscount(totalDiscount);
       // <할인 후 예상 결제 금액>
       eventPlanner.printTitleTotalPriceAfterDiscount();
       // <8500원>
-      eventPlanner.printPrice(totalPrice);
+      eventPlanner.printPrice(expectedTotalPrice);
       // <12월 이벤트 배지>
       eventPlanner.printTitleBadge();
-      eventPlanner.printBadge(eventListBadge.배지.value);
+      eventPlanner.printBadge(eventListBadge.이벤트_배지);
     }
   }
 }

@@ -14,6 +14,7 @@ class EventPlanner {
       return visitDateNumber;
     } catch (error) {
       Console.print(error.message);
+      return this.getVisitDate();
     }
   }
 
@@ -25,6 +26,7 @@ class EventPlanner {
       return orderMenuArray;
     } catch (error) {
       Console.print(error.message);
+      return this.getOrderMenu();
     }
   }
   printNothing() {
@@ -89,9 +91,12 @@ class EventPlanner {
     OutputView.printMenuAndCount('샴페인', 1);
   }
 
-  printTotalDiscountList(discountAmount) {
-    discountAmount.forEach(() => {
-      OutputView.printTotalDiscountList(discountAmount.key, discountAmount.value);
+  printTotalDiscountList(discountAmount, eventList) {
+    Object.entries(discountAmount).forEach(([eventName, discount]) => {
+      if (eventList[eventName]) {
+        const formattedEventName = eventName.replace(/_/g, ' ');
+        OutputView.printTotalDiscountList(formattedEventName, discount);
+      }
     });
   }
 

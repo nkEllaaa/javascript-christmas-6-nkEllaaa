@@ -73,7 +73,7 @@ class EventCalculator {
 
   // 크리스마스 이벤트 계산
   calculateChristmasEvent() {
-    if (this.#eventList.christmas) {
+    if (this.#eventList.크리스마스_디데이_할인) {
       const christMasDiscountAmount = (this.#visitDate - 1) * 100 + 1000;
       console.log('크리스마스이벤트', christMasDiscountAmount)
       this.#discountAmount.크리스마스_디데이_할인 = christMasDiscountAmount;
@@ -101,7 +101,7 @@ class EventCalculator {
 
   // 주중 이벤트 계산
   calculateWeekdayEvent() {
-    if (this.#eventList.weekday) {
+    if (this.#eventList.평일_할인) {
       const weekdayDiscountAmount = this.#dessertCount * 2023;
       this.#discountAmount.평일_할인 = weekdayDiscountAmount;
       this.#totalDiscountPrice += weekdayDiscountAmount;
@@ -111,7 +111,7 @@ class EventCalculator {
 
   // 주말 이벤트 계산
   calculateWeekendEvent() {
-    if (this.#eventList.weekend) {
+    if (this.#eventList.주말_할인) {
       const weekendDiscountAmount = this.#mainCount * 2023;
       this.#discountAmount.주말_할인 = weekendDiscountAmount;
       this.#totalDiscountPrice += weekendDiscountAmount;
@@ -121,7 +121,7 @@ class EventCalculator {
 
   // 스페셜 이벤트 계산
   calculateSpecialEvent() {
-    if (this.#eventList.special) {
+    if (this.#eventList.특별_할인) {
       const specialDiscountAmount = 1000;
       this.#discountAmount.특별_할인 = specialDiscountAmount;
       this.#totalDiscountPrice += specialDiscountAmount;
@@ -133,7 +133,7 @@ class EventCalculator {
   calculateChampagneEvent() {
     if (this.#totalPrice >= 120000) {
       const champagneDiscountAmount = 25000;
-      this.#discountAmount = champagneDiscountAmount;
+      this.#discountAmount.증정_이벤트 = champagneDiscountAmount;
       this.#totalDiscountPrice += champagneDiscountAmount;
     }
   }
