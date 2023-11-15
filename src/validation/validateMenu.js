@@ -4,7 +4,7 @@ import { ERROR_MENU } from '../constants/error.js';
 const validateMenu = (menuAndQuantity) => {
   if (menuAndQuantity.length < 1) throw new Error(ERROR_MENU.none);
 
-  const orderPattern = /^([가-힣]+)-(\d+)$/;
+  const orderPattern = /^([가-힣]+)-([1-9]|1[0-9]|20)$/;
   const isValidPattern = menuAndQuantity.every((menu) => orderPattern.test(menu));
   if (!isValidPattern) throw new Error(ERROR_MENU.pattern);
 
@@ -30,6 +30,9 @@ const validateMenu = (menuAndQuantity) => {
   });
 
   if (!menuCount.every((count) => count > 0)) throw new Error(ERROR_MENU.count);
+
+  const totalCount = menuCount.reduce((acc, count) => ((acc += parseInt(count)), 0));
+  if (totalCount > 20) throw new Error(ERROR_MENU.count);
 };
 
 export default validateMenu;
