@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
   printMessage(message) {
-    Console.print(message);
+    Console.print(message, '\n');
   },
 
   printTitle(title) {
@@ -14,7 +14,7 @@ const OutputView = {
   },
 
   printTotalDiscountList(eventName, discount) {
-    const formatDiscount = price.toLocaleString('ko-KR');
+    const formatDiscount = discount.toLocaleString('ko-KR');
     Console.print(`${eventName}: -${formatDiscount}원\n`);
   },
 
@@ -26,10 +26,6 @@ const OutputView = {
   printTotalDiscountAmount(discount) {
     const formatDiscount = discount.toLocaleString('ko-KR');
     Console.print(`-${formatDiscount}원\n`);
-  },
-
-  printWelcom() {
-    Console.print('안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.\n');
   },
 
   printDiscountForDate(visitDate) {
