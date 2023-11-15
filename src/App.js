@@ -34,6 +34,7 @@ class App {
     this.#eventCalculator = new EventCalculator();
     this.#eventManager = new EventManager();
   }
+  
   async run() {
     await this.createOrder();
     this.formatOrder();
