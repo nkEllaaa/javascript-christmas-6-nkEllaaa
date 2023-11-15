@@ -13,7 +13,7 @@ class EventPlanner {
       return visitDateNumber;
     } catch (error) {
       Console.print(error.message);
-      return this.getVisitDate();
+      return await this.getVisitDate();
     }
   }
 
@@ -24,7 +24,7 @@ class EventPlanner {
       return orderMenuArray;
     } catch (error) {
       Console.print(error.message);
-      return this.getOrderMenu();
+      return await this.getOrderMenu();
     }
   }
 
