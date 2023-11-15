@@ -1,5 +1,5 @@
 import validateVisitDate from '../../src/validation/validatevisitDate';
-import ERROR_DATE from '../../src/constants/error';
+import { ERROR_DATE } from '../../src/constants/error';
 
 describe('방문 날짜 테스트', () => {
   test('방문 날짜 공백 테스트', () => {

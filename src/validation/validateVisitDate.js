@@ -1,4 +1,4 @@
-import ERROR_DATE from '../constants/error';
+import { ERROR_DATE } from '../constants/error';
 
 const validateVisitDate = (visitDate) => {
   if (visitDate.length === 0) {

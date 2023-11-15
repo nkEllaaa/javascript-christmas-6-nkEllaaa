@@ -1,29 +1,30 @@
 import validateMenu from '../../src/validation/validateMenu';
+import { ERROR_MENU } from '../../src/constants/error';
 
 describe('주문 메뉴 테스트 ', () => {
   test('주문 메뉴 공백 테스트', () => {
     const menu = '';
-    expect(() => validateMenu(menu)).toThrow('[ERROR]');
+    expect(() => validateMenu(menu)).toThrow(ERROR_MENU.none);
   });
 
   test('주문 메뉴 패턴 테스트', () => {
     const menu = ['시저샐러드:1'];
-    expect(() => validateMenu(menu)).toThrow('[ERROR]');
+    expect(() => validateMenu(menu)).toThrow(ERROR_MENU.pattern);
   });
 
   test('주문 메뉴 존재 여부 판단 테스트', () => {
     const menu = ['초밥-1'];
-    expect(() => validateMenu(menu)).toThrow('[ERROR]');
+    expect(() => validateMenu(menu)).toThrow(ERROR_MENU.none);
   });
 
   test('주문 메뉴 타입이 모두 beverage인지 테스트', () => {
     const menu = ['제로콜라-1,레드와인-1'];
-    expect(() => validateMenu(menu)).toThrow('[ERROR]');
+    expect(() => validateMenu(menu)).toThrow(ERROR_MENU.onlyBeverage);
   });
 
   test('주문 메뉴 중복 테스트', () => {
     const menu = ['시저샐러드-1,시저샐러드-1,제로콜라-1'];
-    expect(() => validateMenu(menu)).toThrow('[ERROR]5');
+    expect(() => validateMenu(menu)).toThrow(ERROR_MENU.duplicated);
   });
 
   test('옳은 주문에서 통과하는지 테스트', () => {
