@@ -1,3 +1,5 @@
+import { DATE, PRICE } from '../constants/constants'
+
 class EventManager {
   #visitDateNumber;
   #visitDayNumber;
@@ -44,12 +46,12 @@ class EventManager {
   }
 
   checkChristmasEvent() {
-    if (this.#visitDateNumber >= 1 && this.#visitDateNumber <= 25)
+    if (this.#visitDateNumber >= DATE.eventStart && this.#visitDateNumber <= DATE.christmas)
       this.#eventList.크리스마스_디데이_할인 = true;
   }
 
   checkweekdayOrEndEvent() {
-    if (this.#visitDayNumber === 5 || this.#visitDayNumber === 6) {
+    if (this.#visitDayNumber === DATE.friday || this.#visitDayNumber === DATE.saturdaty) {
       this.#eventList.주말_할인 = true;
       this.#eventList.평일_할인 = false;
     } else {
@@ -59,12 +61,12 @@ class EventManager {
   }
 
   checkSpecialEvent() {
-    if (this.#visitDayNumber === 0 || this.#visitDateNumber === 25)
+    if (this.#visitDayNumber === DATE.sunday || this.#visitDateNumber === DATE.christmas)
       this.#eventList.특별_할인 = true;
   }
 
   checkChampagne(totalPrice) {
-    if (totalPrice >= 120000) this.#eventList.증정_이벤트 = true;
+    if (totalPrice >= PRICE.isChampagnePossible) this.#eventList.증정_이벤트 = true;
   }
 }
 export default EventManager;

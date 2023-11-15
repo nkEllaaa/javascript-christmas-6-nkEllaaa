@@ -11,4 +11,13 @@ const PRICE = {
   BadgeStar: 5_000,
 };
 
-module.exports = { PRICE };
+const DATE = {
+  eventStart: 1,
+  eventFinish: 31,
+  christmas: 25,
+  friday: 5,
+  saturdaty: 6,
+  sunday: 0,
+}
+
+module.exports = { PRICE, DATE };
