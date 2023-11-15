@@ -1,5 +1,6 @@
 import MenuList from '../MenuList';
 import { PRICE } from '../constants/constants';
+import MESSAGES from '../constants/messages';
 
 class EventCalculator {
   #totalPrice;
@@ -141,9 +142,9 @@ class EventCalculator {
 
   // 배지 이벤트 계산
   calculateBadgeEvent() {
-    if (this.#totalDiscountPrice >= PRICE.BadgeSanta) this.#eventList.이벤트_배지 = '산타';
-    else if (this.#totalDiscountPrice >= PRICE.BadgeTree) this.#eventList.이벤트_배지 = '트리';
-    else if (this.#totalDiscountPrice >= PRICE.BadgeStar) this.#eventList.이벤트_배지 = '별';
+    if (this.#totalDiscountPrice >= PRICE.BadgeSanta) this.#eventList.이벤트_배지 = MESSAGES.santa;
+    else if (this.#totalDiscountPrice >= PRICE.BadgeTree) this.#eventList.이벤트_배지 = MESSAGES.tree;
+    else if (this.#totalDiscountPrice >= PRICE.BadgeStar) this.#eventList.이벤트_배지 = MESSAGES.star;
   }
 }
 

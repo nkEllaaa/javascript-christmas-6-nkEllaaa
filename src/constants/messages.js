@@ -8,6 +8,9 @@ const MESSAGES = {
   totalDiscountCost: '총혜택 금액',
   expectedCostAfterDiscount: '할인 후 예상 결제 금액',
   badge: '12월 이벤트 배지',
+  santa: '산타',
+  tree: '트리',
+  star: '별',
 
   eventForDate(visitDate) {
     `12월 ${visitDate}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`;
