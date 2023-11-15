@@ -94,7 +94,7 @@ class EventPlanner {
     Object.entries(discountAmount).forEach(([eventName, discount]) => {
       if (eventList[eventName]) {
         const formattedEventName = eventName.replace(/_/g, ' ');
-        OutputView.printTotalDiscountList(formattedEventName, discount);
+        if (discount > 0) OutputView.printTotalDiscountList(formattedEventName, discount);
       }
     });
   }
