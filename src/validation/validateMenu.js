@@ -8,8 +8,8 @@ const validateMenu = (menuAndQuantity) => {
   const isValidPattern = menuAndQuantity.every((menu) => orderPattern.test(menu));
   if (!isValidPattern) throw new Error(ERROR_MENU.pattern);
 
-  const menuNames = menuAndQuantity.flatMap((menuAndQuantity) => {
-    return menuAndQuantity.split(',').map((menuName) => menuName.split('-')[0]);
+  const menuNames = menuAndQuantity.flatMap((menu) => {
+    return menu.split(',').map((menuName) => menuName.split('-')[0]);
   });
 
   const isMenu = menuNames.find((name) => !MenuList.hasOwnProperty(name));
@@ -19,6 +19,17 @@ const validateMenu = (menuAndQuantity) => {
     throw new Error(ERROR_MENU.onlyBeverage);
 
   if (menuNames.length !== new Set(menuNames).size) throw new Error(ERROR_MENU.duplicated);
+
+  const menuCount = menuAndQuantity.flatMap((menu) => {
+    return menu.split(',').map((menuName) => menuName.split('-')[1]);
+  });
+
+  menuCount.forEach((count) => {
+    const parsedCount = parseInt(count);
+    if (Number.isNaN(parsedCount)) throw new Error(ERROR_MENU.count);
+  });
+
+  if (!menuCount.every((count) => count > 0)) throw new Error(ERROR_MENU.count);
 };
 
 export default validateMenu;
