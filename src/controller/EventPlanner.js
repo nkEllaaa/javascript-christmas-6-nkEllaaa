@@ -27,6 +27,7 @@ class EventPlanner {
       return this.getOrderMenu();
     }
   }
+
   printNothing() {
     OutputView.printMessage(MESSAGES.nothing);
   }

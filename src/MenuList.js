@@ -50,6 +50,6 @@ const MenuList = {
     type: 'beverage',
     price: 25_000,
   },
-}
+};
 
 export default MenuList;

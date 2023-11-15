@@ -76,7 +76,8 @@ class EventCalculator {
   // 크리스마스 이벤트 계산
   calculateChristmasEvent() {
     if (this.#eventList.크리스마스_디데이_할인) {
-      const christMasDiscountAmount = (this.#visitDate - 1) * PRICE.accumulatePerDay + PRICE.firstDay;
+      const christMasDiscountAmount =
+        (this.#visitDate - 1) * PRICE.accumulatePerDay + PRICE.firstDay;
       this.#discountAmount.크리스마스_디데이_할인 = christMasDiscountAmount;
       this.#totalDiscountPrice += christMasDiscountAmount;
       this.#expectedTotalPrice += christMasDiscountAmount;
@@ -143,8 +144,10 @@ class EventCalculator {
   // 배지 이벤트 계산
   calculateBadgeEvent() {
     if (this.#totalDiscountPrice >= PRICE.BadgeSanta) this.#eventList.이벤트_배지 = MESSAGES.santa;
-    else if (this.#totalDiscountPrice >= PRICE.BadgeTree) this.#eventList.이벤트_배지 = MESSAGES.tree;
-    else if (this.#totalDiscountPrice >= PRICE.BadgeStar) this.#eventList.이벤트_배지 = MESSAGES.star;
+    else if (this.#totalDiscountPrice >= PRICE.BadgeTree)
+      this.#eventList.이벤트_배지 = MESSAGES.tree;
+    else if (this.#totalDiscountPrice >= PRICE.BadgeStar)
+      this.#eventList.이벤트_배지 = MESSAGES.star;
   }
 }
 

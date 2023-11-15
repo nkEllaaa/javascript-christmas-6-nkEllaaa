@@ -9,6 +9,6 @@ const PRICE = {
   BadgeSanta: 20_000,
   BadgeTree: 10_000,
   BadgeStar: 5_000,
-}
+};
 
-module.exports = { PRICE }
+module.exports = { PRICE };
