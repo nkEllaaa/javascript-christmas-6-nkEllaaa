@@ -3,7 +3,7 @@ import { Console } from '@woowacourse/mission-utils';
 const InputView = {
   async getVisitDate() {
     const visitDate = await Console.readLineAsync(
-      '12월 중 식당 예상 방문 날짜는 언제인가요? (월은 제외하고 날짜만 입력해주세요. e.g. 12)'
+      '12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)'
     );
     const visitDateToNumber = parseInt(visitDate, 10);
     return visitDateToNumber;

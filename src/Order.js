@@ -31,7 +31,6 @@ class Order {
         totalPrice += menuInfo.price * orderItem.count;
       }
     });
-    console.log('토탈', totalPrice);
     return totalPrice;
   }
 }
