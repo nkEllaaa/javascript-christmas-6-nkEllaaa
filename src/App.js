@@ -2,6 +2,7 @@ import EventPlanner from './controller/EventPlanner';
 import EventCalculator from './controller/EventCalculator';
 import EventManager from './controller/EventManager';
 import Order from './Order';
+import { PRICE } from './constants/constants';
 
 class App {
   #totalPriceBeforeDiscount;
@@ -96,7 +97,7 @@ class App {
 
   runIsChampagne() {
     this.#eventPlanner.printTitleChampagne();
-    if (this.#totalPriceBeforeDiscount >= 120000) {
+    if (this.#totalPriceBeforeDiscount >= PRICE.isChampagnePossible) {
       this.#eventPlanner.printChamphagne();
       return;
     }
@@ -105,7 +106,7 @@ class App {
 
   runBenefitList() {
     this.#eventPlanner.printTitleTotalDiscount();
-    if (this.#totalPriceBeforeDiscount >= 10000) {
+    if (this.#totalPriceBeforeDiscount >= PRICE.isEventPossible) {
       this.#eventPlanner.printTotalDiscountList(this.#discountPriceList, this.#eventList);
       return;
     }
@@ -114,7 +115,7 @@ class App {
 
   runTotalBenefitPrice() {
     this.#eventPlanner.printTitleExpectedPrice();
-    if (this.#totalPriceBeforeDiscount >= 10000) {
+    if (this.#totalPriceBeforeDiscount >= PRICE.isEventPossible) {
       this.#eventPlanner.printDiscount(this.#discountAmount);
       return;
     }
@@ -128,7 +129,7 @@ class App {
 
   runEventBadge() {
     this.#eventPlanner.printTitleBadge();
-    if (this.#totalPriceBeforeDiscount >= 10000) {
+    if (this.#totalPriceBeforeDiscount >= PRICE.isEventPossible) {
       this.#eventPlanner.printBadge(this.#eventListBadge.이벤트_배지);
       return;
     }
@@ -136,19 +137,12 @@ class App {
   }
 
   runEventPlanner() {
-    // <주문 메뉴>
     this.runOrderMenu();
-    // <할인 전 총주문 금액>
     this.runTotalPriceBeforeDiscount();
-    // <증정 메뉴>
     this.runIsChampagne();
-    // <혜택 내역>
     this.runBenefitList();
-    //< 총혜택금액>
     this.runTotalBenefitPrice();
-    // <할인 후 예상 결제 금액>
     this.runExpectedPriceAfterDiscount;
-    //<배지>
     this.runEventBadge();
   }
 
