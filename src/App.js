@@ -8,7 +8,7 @@ class App {
   #visitDate;
   #orderMenu;
   #formattedOrderMenu;
-  // #order;
+  #order;
   #eventList;
   #discountAmount;
   #expectedPriceAfterDiscount;
@@ -21,40 +21,39 @@ class App {
     this.#visitDate;
     this.#orderMenu;
     this.#formattedOrderMenu;
-    this.order;
+    this.#order;
     this.#eventList;
     this.#discountAmount;
     this.#expectedPriceAfterDiscount;
     this.#eventListBadge;
     this.#discountPriceList;
-    this.eventPlanner = new EventPlanner();
+    this.#eventPlanner = new EventPlanner();
   }
   async run() {
     const eventCalculator = new EventCalculator();
     const eventManager = new EventManager();
 
     // 안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.
-    this.eventPlanner.printWelcome();
+    this.#eventPlanner.printWelcome();
 
     // 날짜 입력받고 유효성 검사까지 통과
-    this.#visitDate = await this.eventPlanner.getVisitDate();
+    this.#visitDate = await this.#eventPlanner.getVisitDate();
 
     // 주문 메뉴 입력받고 유효성 검사까지 통과
-    const orderMenuArray = await this.eventPlanner.getOrderMenu();
-    this.#orderMenu = orderMenuArray;
+    this.#orderMenu = await this.#eventPlanner.getOrderMenu();
 
     //12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!
-    this.eventPlanner.printDiscountForDate(this.#visitDate);
+    this.#eventPlanner.printDiscountForDate(this.#visitDate);
 
     // 유효한 날짜와 메뉴로 오더 생성
-    this.order = new Order(this.#visitDate, this.#orderMenu);
+    this.#order = new Order(this.#visitDate, this.#orderMenu);
 
     // 오더에서 주문 메뉴의 형식을 바꿔줌
-    this.order.formatOrderMenuObject();
-    this.#formattedOrderMenu = this.order.getFormattedOrder();
+    this.#order.formatOrderMenuObject();
+    this.#formattedOrderMenu = this.#order.getFormattedOrder();
 
     // 총주문금액 계산
-    this.#totalPriceBeforeDiscount = this.order.setTotalPrice();
+    this.#totalPriceBeforeDiscount = this.#order.setTotalPrice();
 
     // 이벤트 매니저로 유효한 이벤트 판단
     eventManager.getVisitDateNumber(this.#visitDate);
@@ -75,23 +74,11 @@ class App {
 
     // 총혜택금액
     this.#discountAmount = eventCalculator.getTotalDiscountAmount();
-    // console.log('총혜택금액', totalDiscount);
-
-    console.log('discountAmount', this.#discountAmount);
-    console.log('이벤트리스트', this.#eventList);
-
-
-
 
     // 샴페인 가격을 뺀 나머지 혜택 금액 = 할인 후 예상 결제 금액
     this.#expectedPriceAfterDiscount = eventCalculator.getExpectedTotalPrice();
-    // console.log('할인 후 예상 결제 금액', expectedTotalPrice);
-
     this.#discountPriceList = eventCalculator.getDiscountAmount();
-    // console.log('디스카운트어마운ㅊ트', discountAmount);
-
     this.#eventListBadge = eventCalculator.getEventListIncludeBadge();
-    // console.log('배지포함', eventListBadge);
 
     // <주문 메뉴>
     this.runOrderMenu();
@@ -110,54 +97,54 @@ class App {
   }
 
   runOrderMenu() {
-    this.eventPlanner.printTitleOrderMenu();
-    this.eventPlanner.printOrderMenu(this.#formattedOrderMenu);
+    this.#eventPlanner.printTitleOrderMenu();
+    this.#eventPlanner.printOrderMenu(this.#formattedOrderMenu);
   }
 
   runTotalPriceBeforeDiscount() {
-    this.eventPlanner.printTitleTotalPrice();
-    this.eventPlanner.printPrice(this.#totalPriceBeforeDiscount);
+    this.#eventPlanner.printTitleTotalPrice();
+    this.#eventPlanner.printPrice(this.#totalPriceBeforeDiscount);
   }
 
   runIsChampagne() {
-    this.eventPlanner.printTitleChampagne();
+    this.#eventPlanner.printTitleChampagne();
     if (this.#totalPriceBeforeDiscount >= 120000) {
-      this.eventPlanner.printChamphagne();
-    } else {
-      this.eventPlanner.printNothing();
+      this.#eventPlanner.printChamphagne();
+      return;
     }
+    this.#eventPlanner.printNothing();
   }
 
   runBenefitList() {
-    this.eventPlanner.printTitleTotalDiscount();
+    this.#eventPlanner.printTitleTotalDiscount();
     if (this.#totalPriceBeforeDiscount >= 10000) {
-      this.eventPlanner.printTotalDiscountList(this.#discountPriceList, this.#eventList);
-    } else {
-      this.eventPlanner.printNothing();
+      this.#eventPlanner.printTotalDiscountList(this.#discountPriceList, this.#eventList);
+      return;
     }
+    this.#eventPlanner.printNothing();
   }
 
   runTotalBenefitPrice() {
-    this.eventPlanner.printTitleExpectedPrice();
+    this.#eventPlanner.printTitleExpectedPrice();
     if (this.#totalPriceBeforeDiscount >= 10000) {
-      this.eventPlanner.printDiscount(this.#discountAmount);
-    } else {
-      this.eventPlanner.printNothing();
+      this.#eventPlanner.printDiscount(this.#discountAmount);
+      return;
     }
+    this.#eventPlanner.printNothing();
   }
 
   runExpectedPriceAfterDiscount() {
-    this.eventPlanner.printTitleTotalPriceAfterDiscount();
-    this.eventPlanner.printPrice(this.#expectedPriceAfterDiscount);
+    this.#eventPlanner.printTitleTotalPriceAfterDiscount();
+    this.#eventPlanner.printPrice(this.#expectedPriceAfterDiscount);
   }
 
   runEventBadge() {
-    this.eventPlanner.printTitleBadge();
+    this.#eventPlanner.printTitleBadge();
     if (this.#totalPriceBeforeDiscount >= 10000) {
-      this.eventPlanner.printBadge(this.#eventListBadge.이벤트_배지);
-    } else {
-      this.eventPlanner.printNothing();
+      this.#eventPlanner.printBadge(this.#eventListBadge.이벤트_배지);
+      return;
     }
+    this.#eventPlanner.printNothing();
   }
 }
 
