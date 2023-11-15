@@ -129,7 +129,7 @@ class App {
 
   runEventBadge() {
     this.#eventPlanner.printTitleBadge();
-    if (this.#totalPriceBeforeDiscount >= PRICE.isEventPossible) {
+    if (this.#totalPriceBeforeDiscount >= PRICE.isEventPossible && this.#discountAmount >= PRICE.BadgeStar) {
       this.#eventPlanner.printBadge(this.#eventListBadge.이벤트_배지);
       return;
     }
@@ -142,10 +142,9 @@ class App {
     this.runIsChampagne();
     this.runBenefitList();
     this.runTotalBenefitPrice();
-    this.runExpectedPriceAfterDiscount;
+    this.runExpectedPriceAfterDiscount();
     this.runEventBadge();
   }
-
 }
 
 export default App;
